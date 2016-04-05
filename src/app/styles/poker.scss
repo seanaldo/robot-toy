@@ -1,0 +1,492 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+ */
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+.poker-window {
+    background-color: red;
+    position: relative;
+    .initGame {
+      z-index: 4000;
+      height: 400px;
+      width: 400px;
+      background-color: white;
+      border-radius: 5px;
+      margin: auto;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      h3 {
+        text-align: center;
+      }
+      .button-groups {
+        position: absolute;
+        margin: auto;
+        top: 80px;
+        left: 0;
+        right: 0;
+        width: 76%;
+      }
+    }
+    .chance-box {
+      position: absolute;
+      height: 50px;
+      background-color: #fff;
+      border:1px solid #000;
+      width: 100px;
+      margin: 15px;
+      right: 0;
+      h3 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        margin:0;
+        top: 10px;
+      }
+    }
+    .settings-modal {
+      button {
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+      height: 60px;
+    }
+    .bottom-box {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 70px;
+      padding: 0 10px;
+      margin: 10px 0;
+      .bet-box {
+        right: 22%;
+        left: 10px;
+        height: 35px;
+        position: absolute;
+        span {
+          float: left;
+          width: 20%;
+          height: 100%;
+        }
+        .start-box {
+          button {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .cash-handling-box {
+          button {
+            width: 50%;
+            height: 100%;
+            float: left;
+          }
+        }
+        .chips-box {
+          button {
+            width: 25%;
+            float: left;
+            height: 100%;
+          }
+        }
+        .bet-display-box {
+          background-color: #fff;
+          text-align: center;
+          border: 1px solid #000;
+        }
+        .bank-box {
+          background-color: #fff;
+          text-align: center;
+          border: 1px solid #000;
+        }
+      }
+      .play-box {
+        right: 22%;
+        left: 10px;
+        height: 35px;
+        top: 35px;
+        position: absolute;
+        button {
+          width: 20%;
+          float: left;
+          height: 100%;
+        }
+      }
+      .message-box {
+        text-align: center;
+        width: 20%;
+        right: 10px;
+        height: 70px;
+        background-color: #fff;
+        border: 1px solid #000;
+        position: absolute;
+        overflow-y: scroll; 
+      }
+      button[disabled=disabled], button:disabled {
+        opacity:0.7;
+      }
+    }
+    table, tbody, tr, td {
+      border: 2px solid yellow;
+    }
+    table {
+      width: 100%;
+      tbody {
+        tr {
+          td.player-hand,
+          td.opponent-hand {
+            .hand-collection {
+              width: 160px;
+            }
+          }
+          td.burn-hand {
+            .hand-collection {
+              width: 230px;
+              margin-top: 10px;
+            }
+          }
+          td.table-hand {
+            .hand-collection {
+              width: 400px;
+              margin-top: 10px;
+            }
+          }
+          td.player-hand,
+          td.opponent-hand,
+          td.burn-hand,
+          td.table-hand {
+            width: auto;
+            text-align: center;
+            height: 96px;
+            margin-right: auto;
+            margin-left: auto;
+            position: relative;
+            .topbet-box {
+              font-size: 20px;
+              border-radius: 50%;
+              left: 10px;
+              top: 20px;
+              width: 60px;
+              padding: 15px 10px;
+              background-color: orange;
+              text-align: center;
+              position: absolute;
+            }
+            .pot-box {
+              font-size: 20px;
+              border-radius: 50%;
+              top: 20px;
+              right: 10px;
+              width: 60px;
+              padding: 15px 10px;
+              background-color: green;
+              text-align: center;
+              position: absolute;
+            }
+            h1.glyphicon-triangle-bottom {
+              position: absolute;
+              font-size: 60px;
+              color: #ffd700;
+              text-align: center;
+              top: -80px;
+              left: 25%;
+              right: 25%;
+            }
+            .hand-collection {
+              position: relative;
+              height: 100%;
+              margin-right: auto;
+              margin-left: auto;
+            }
+            h3 {
+              background-color: #fff;
+              text-align: center;
+              margin-top: 0;
+              width: 50%;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            div.handBet {
+              font-size: 20px;
+              border-radius: 50%;
+              position: absolute;
+              left: 10px;
+              width: 60px;
+              padding: 15px 10px;
+              background-color: yellow;
+              text-align: center;
+            }
+            div.dealerChip {
+              position: absolute;
+              right: 0;
+              left: 0;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            div.pokerStack {
+              font-size: 20px;
+              border-radius: 50%;
+              position: absolute;
+              right: 10px;
+              width: 60px;
+              padding: 15px 10px;
+              background-color: #fff;
+              text-align: center;
+            }
+            div.sidePot {
+              font-size: 20px;
+              border-radius: 50%;
+              position: absolute;
+              right: 60px;
+              width: 60px;
+              padding: 15px 10px;
+              background-color: blue;
+              text-align: center;
+            }
+            div.playeraction {
+              border: 1px solid #000;
+              background-color: #fff;
+              position: absolute;
+              width: 80%;
+              margin-left: 10%;
+              margin-right: 10%;
+              height: 42px;
+              overflow-y: auto; 
+            }
+            .bet-red {
+              border: 10px dashed red;
+            }
+            .bet-blue {
+              border: 10px dashed blue;
+            }
+            .bet-green {
+              border: 10px dashed green;
+            }
+            .bet-black {
+              border: 10px dashed black;
+            }
+          }
+          td.active {
+            background-color: blue;
+          }
+          td.lost {
+            div.pokerStack,
+            div.handBet,
+            div.playeraction {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    table.top-table {
+      height: 210px;
+      .hand-collection {
+        top: 47px;
+      }
+      div.handBet {
+        bottom: 0;
+      }
+      div.dealerChip {
+        bottom: 0;
+      }
+      div.pokerStack {
+        bottom: 0;
+      }
+      div.sidePot {
+        bottom: 0;
+      }
+      div.playeraction {
+        top: 0;
+      }
+    }
+    table.mid-table {
+      height: 120px;
+    }
+    table.bottom-table {
+      height: 210px;
+      .hand-collection {
+        top: 65px;
+      }
+      div.handBet {
+        top: 0;
+      }
+      div.dealerChip {
+        top: 0;
+      }
+      div.pokerStack {
+        top: 0;
+      }
+      div.sidePot {
+        top: 0;
+      }
+      div.playeraction {
+        bottom: 0;
+      }
+    }
+
+    .final-box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    padding: 0 10px;
+    margin: 10px 0;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 30px;
+    }
+      .button-location {
+      top: 90%;
+      height: 10%;
+      position: absolute;
+    }
+    .bottom-box {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 70px;
+      padding: 0 10px;
+      margin: 10px 0;
+      .bet-box {
+        right: 22%;
+        left: 10px;
+        height: 35px;
+        position: absolute;
+        span {
+          float: left;
+          width: 20%;
+          height: 100%;
+        }
+
+        .progress-box {
+          float: left;
+          width: 20%;
+          height: 100%;
+          .percentage-cur .num {
+            margin-right: 5px;
+          }
+          .progress-bar {
+            width: 100%;
+            height: 60%;
+            background: #f2f1f1;
+            margin-bottom: 3px;
+            border: 1px solid #dfdfdf;
+            box-shadow: 0 0 2px #D5D4D4 inset;
+            position: relative;
+            .inner {
+              position: relative;
+              width: 0;
+              height:100%;
+              background: #239bd6; 
+            }
+            .inner {
+              height: 0;
+              width: 0;
+            }
+          }
+        }
+
+        .progress-bar-slider {
+          .inner {
+            transition: none;
+          }
+          .inner:after {
+            content: " ";
+            width: 5px;
+            background-color:#ccc;
+            position: absolute;
+            right: -2px;
+            top: -2px;
+            bottom: -20px;
+            border: 1px solid #bbb;
+            border-radius: 2px;
+            box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+            margin: 0px;
+          }
+        }
+
+        .progress-slider {
+          opacity: 0;
+          width: 100%;
+          height: 15px;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          cursor: pointer;
+          z-index: 1;
+        }
+
+        .start-box {
+          button {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .cash-handling-box {
+          button {
+            width: 50%;
+            height: 100%;
+            float: left;
+          }
+        }
+        .chips-box {
+          button {
+            width: 25%;
+            float: left;
+            height: 100%;
+          }
+        }
+        .bet-display-box {
+          background-color: #fff;
+          text-align: center;
+          border: 1px solid #000;
+        }
+        .bank-box {
+          background-color: #fff;
+          text-align: center;
+          border: 1px solid #000;
+        }
+      }
+      .play-box {
+        right: 22%;
+        left: 10px;
+        height: 35px;
+        top: 35px;
+        position: absolute;
+        button {
+          width: 20%;
+          float: left;
+          height: 100%;
+        }
+      }
+      .message-box {
+        text-align: center;
+        width: 20%;
+        right: 10px;
+        height: 70px;
+        background-color: #fff;
+        border: 1px solid #000;
+        position: absolute;
+        overflow-y: scroll; 
+      }
+      button[disabled=disabled], button:disabled {
+        opacity:0.7;
+      }
+    }
+    
+}
+
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector

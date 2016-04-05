@@ -1,0 +1,57 @@
+.acme-navbar-text{
+  color: white;
+}
+.navbar-inverse {
+	background-image: url(../assets/images/casinoBanner.jpg);
+	background-size:100%;
+}
+.navbar {
+	min-height: 70px;
+	.navbar-brand {
+		height: 70px;
+		color: #fff;
+		padding: 25px;
+	}
+	.navbar-nav li {
+		a {
+			color: #fff;
+			padding-top:25px;
+			padding-bottom: 25px;
+		}
+		a:focus, a:hover {
+			background-color: transparent !important;
+		}
+	}
+}
+
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+    background-color: black;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+    background-color: black;
+    li {
+    	background-color: black;
+    	a {	
+    		padding-top: 5px;
+    		padding-bottom: 5px;
+    	}
+    }
+    li:hover {
+    	background-color: blue;
+    }
+}

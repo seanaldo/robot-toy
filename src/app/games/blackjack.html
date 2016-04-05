@@ -1,0 +1,104 @@
+    <div class="blackjack-window game-window">
+        <div class="count-box pull-right" ng-show="blackjack.cardCountOption == 'on'">
+            <h3>{{getCardCount()}}</h3>
+        </div>
+        <!--settings modal-->
+        <div class="settings-modal">
+          <button ng-click="toggleModal()" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
+          <modal title="Blackjack Settings" visible="showModal">
+            <div>
+              Card Counting: 
+              <label class="radio-inline active">
+                <input type="radio" ng-model="blackjack.cardCountOption" value="on" checked=""> On
+              </label>
+              <label class="radio-inline">
+                <input type="radio" ng-model="blackjack.cardCountOption" value="off"> Off 
+              </label>
+            </div>
+            <div>
+              Rounds before Reshuffle: 
+              <button type="submit" class="btn btn-default" ng-click="toggleShuffleOption(-1)"><span class="glyphicon glyphicon-chevron-left"></span></button>
+              <span class="shuffleround">{{blackjack.roundShuffleOption}}</span>
+              <button type="submit" class="btn btn-default" ng-click="toggleShuffleOption(1)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+            <div>
+              Number of Decks:
+              <button type="submit" class="btn btn-default" ng-click="toggleDeckOption(-1)"><span class="glyphicon glyphicon-chevron-left"></span></button>
+              <span class="numofdecks">{{blackjack.numDeckOption}}</span>
+              <button type="submit" class="btn btn-default" ng-click="toggleDeckOption(1)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+            <div>
+              Deck Used: 
+              <button type="submit" ng-click="changeDeck('default')" class="btn btn-default" ng-class="{'active': blackjack.typeOfDeck == 'default'}">Real Deck</button>
+              <button type="submit" ng-click="changeDeck('blackjacktest')" class="btn btn-default" ng-class="{'active': blackjack.typeOfDeck == 'blackjacktest'}">Testdeck</button>
+            </div>
+          </modal>
+        </div>
+        <!--end modal-->
+        <div class="bottom-box">
+            <div class="bet-box">
+                <span class="start-box">
+                    <!--<button type="button" ng-click="initGame(); blackjack.disablebuttons=true" ng-disabled="blackjack.disablebuttons || blackjack.displayBet == 0" class="btn-primary btn-large">Bet</button>-->
+                    <button type="button" ng-click="initGame(); blackjack.disablebuttons=true" ng-disabled="blackjack.disablebuttons || blackjack.displayBet == 0" ng-hide="blackjack.quickbet" class="btn-primary btn-large">Bet ${{blackjack.displayBet}}</button>
+                    <button type="button" ng-click="blackjack.displayBet = blackjack.lastBet; initGame(); blackjack.disablebuttons=true" ng-disabled="bankBalance < blackjack.lastBet" ng-hide="!blackjack.quickbet" class="btn-primary btn-large">Quick Bet ${{blackjack.lastBet}}</button>
+                </span>
+                <span class="chips-box">
+                    <button type="button" ng-click="blackjackBet(10)" ng-disabled="blackjack.disablebuttons || bankBalance < 10 || bankBalance == blackjack.displayBet" class="btn-primary btn-large">10</button>
+                    <button type="button" ng-click="blackjackBet(25)" ng-disabled="blackjack.disablebuttons || bankBalance < 25 || bankBalance == blackjack.displayBet" class="btn-primary btn-large">25</button>
+                    <button type="button" ng-click="blackjackBet(50)" ng-disabled="blackjack.disablebuttons || bankBalance < 50 || bankBalance == blackjack.displayBet" class="btn-primary btn-large">50</button>
+                    <button type="button" ng-click="blackjackBet('clear')" ng-disabled="blackjack.disablebuttons" class="btn-primary btn-large">Clr</button>
+                </span>
+                <span class="bet-display-box">
+                    <p>Betting value: {{blackjack.displayBet}}</p>
+                </span>
+                <span class="bank-box">
+                    <p>Bank: {{bankBalance}}</p>
+                </span>
+            </div>
+            <div class="play-box">
+                <button type="button" ng-click="stayBlackjack()" ng-show="blackjack.claimWin == false" ng-disabled="blackjack.hitstayturn == false" class="btn-primary btn-large">Stay</button>
+                <button type="button" ng-click="claimBlackjack()" ng-show="blackjack.claimWin == true" class="btn-primary btn-large">Blackjack!</button>
+                <button type="button" ng-click="hitBlackjack()" ng-disabled="blackjack.hitstayturn == false" class="btn-primary btn-large">Hit</button>
+                <button type="button" ng-click="splitBlackjack()" ng-disabled="blackjack.hitstayturn == false || blackjack.splitturn == false" class="btn-primary btn-large">Split</button>
+                <button type="button" ng-click="insureBlackjack()" ng-disabled="blackjack.hitstayturn == false || blackjack.insureturn == false" class="btn-primary btn-large">Insurance</button>
+                <button type="button" ng-click="doubleBlackjack()" ng-disabled="blackjack.hitstayturn == false || blackjack.doubleturn == false" class="btn-primary btn-large">Double</button>
+            </div>
+            <div class="message-box">
+                {{blackjack.message}}
+            </div>
+        </div>
+        <table class="dealer-only">
+          <tbody>
+            <tr class="dealer-box">
+              <td align="center" valign="initial" >
+                <div class="blackjack-box" ng-hide="blackjack.dealerhand.cards.length==0">
+                    <div class="hand-collection">
+                        <span ng-repeat="cards in blackjack.dealerhand.cards">
+                            <img ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                        </span>
+                    </div>
+                    <h3>{{ getBlackjackTotal(blackjack.dealerhand) }}</h3>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="player-only">
+          <tbody>
+            <tr class="all-hands">
+              <td align="center" valign="initial" class="eachHand" ng-repeat="hands in blackjack.yourhand">
+                  <div class="hand1-box blackjack-box" ng-hide="hands.cards.length==0">
+                      <h1 ng-show="hands.activeclass==true" class="glyphicon glyphicon-triangle-bottom"></h1>
+                      <h3 class="handTotal">{{ getBlackjackTotal(hands) }}</h3>
+                      <div class="hand-collection">
+                          <span ng-repeat="cards in hands.cards">
+                              <img ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                          </span>
+                      </div>
+                      <div class="handBet" ng-class="betColor({{hands.bet}})">{{hands.bet}}</div>
+                  </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>

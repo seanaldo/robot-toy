@@ -1,0 +1,101 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+ */
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+.craps-window {
+  color: white;
+  overflow-x: scroll;
+  width: 100%;
+  table {
+    td,th {
+      border: 1px solid #fff;
+      text-align: center;
+      padding: 5px; 
+    }
+  }
+  button.next-week-button {
+    position: absolute;
+    right: 15px;
+    z-index: 10000;
+  }
+  .league-table {
+    display: inline-block;
+  }
+  .fixture-table {
+  }
+  .results-page {
+    position: relative;
+    .team-row {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .scorer-row {
+      vertical-align: top;
+      font-style: italic;
+    }
+    td.results-td-large {
+      width: 200px;
+    }
+    td.results-td-small {
+      width: 40px;
+    }
+    .gamestats-section {
+      position: absolute;
+      top: 0px;
+      left: 485px;
+      right: 0;
+      height: 100%;
+      .home-column,
+      .away-column {
+        float: left;
+        width: 50%;
+        position: relative;
+        .team-column {
+          th {
+            font-size: 16px;
+          }
+        }
+        .team-score {
+          font-size: 16px;
+          width: 30px;
+        }
+        .team-column,
+        .squad-column {
+          table {
+            width: 100%;
+            margin-bottom: 10px;
+            .fixed-width-box {
+              width: 60px;
+            }
+            .fixed-height-box1 {
+              height: 32px;
+            }
+            .fixed-height-box2 {
+              height: 90px;
+            }
+          }
+        }
+        .squad-column {
+          position: absolute;
+          top: 130px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector

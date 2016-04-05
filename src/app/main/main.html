@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <div ui-view>
+    <div class="intro-window">
+      <h1>Welcome to blackjack casino</h1>
+      <p>This is one of the most ridiculous casinos on the web, where cheating is encouraged and your money disappears sometimes. Have fun!!<p>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
+        <a ui-sref="{{ awesomeThing.uilink }}">
+          <div class="thumbnail">
+            <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
+            <div class="caption">
+              <h3>{{ awesomeThing.title }}</h3>
+              <p>{{ awesomeThing.description }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>

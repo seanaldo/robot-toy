@@ -1,0 +1,259 @@
+    <div class="poker-window game-window">
+      <div class="initGame" ng-hide="poker.gameStarted == true">
+        <h3>Tournament Buyins</h3>
+        <div class="button-groups">
+          <button class="btn btn-success" ng-click="initGame(300)" ng-disabled="bankBalance < 300">
+            Buy In 300
+          </button>
+          <button class="btn btn-success" ng-click="initGame(1000)" ng-disabled="bankBalance < 1000">
+            Buy In 1000
+          </button>
+          <button class="btn btn-success" ng-click="initGame(3000)" ng-disabled="bankBalance < 3000">
+            Buy In 3000
+          </button>
+        </div>
+      </div>
+      <div ng-show="poker.gameStarted == true">
+        <div class="chance-box pull-right" ng-show="poker.assessChanceOption == 'on'">
+            <h3>{{assessChance()}}</h3>
+        </div>
+        <!--settings modal-->
+        <div class="settings-modal">
+          <button ng-click="toggleModal()" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
+          <modal title="Poker Settings" visible="showModal">
+            <div>
+              Winning Probability: 
+              <label class="radio-inline active">
+                <input type="radio" ng-model="poker.assessChanceOption" value="on" checked=""> On
+              </label>
+              <label class="radio-inline">
+                <input type="radio" ng-model="poker.assessChanceOption" value="off"> Off 
+              </label>
+            </div>
+            <div>
+              Deck Used: 
+              <button type="submit" ng-click="changeDeck('default')" class="btn btn-default" ng-class="{'active': poker.typeOfDeck == 'default'}">Real Deck</button>
+              <button type="submit" ng-click="changeDeck('pokertest')" class="btn btn-default" ng-class="{'active': poker.typeOfDeck == 'pokertest'}">Testdeck</button>
+            </div>
+            <div>
+              <button type="submit" ng-click="saveGame()" class="btn btn-default">Save Game</button>
+              <button type="submit" ng-click="loadGame()" class="btn btn-default">Load Game</button>
+            </div>
+            <div>
+              <button type="submit" ng-click="testCards()" class="btn btn-default">Test Cards</button>
+            </div>
+          </modal>
+        </div>
+        <!--end modal-->
+        <div class="poker-table-seatings">
+          <table class='top-table'>
+            <tbody>
+              <tr>
+                <td class="opponent-hand opponent-hand-3" ng-class="{'acting': poker.actingPosition==3, 'lost': poker.allHands[3].lost == true}">
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[3].cards">
+                          <img ng-hide="poker.allHands[3].show == true || poker.allHands[3].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[3].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="handBet">{{poker.allHands[3].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[3].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[3].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[3].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="playeraction">{{poker.allHands[3].announce}}</div>
+                </td>
+                <td class="opponent-hand opponent-hand-4" ng-class="{'acting': poker.actingPosition==4, 'lost': poker.allHands[4].lost == true}">
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[4].cards">
+                          <img ng-hide="poker.allHands[4].show == true || poker.allHands[4].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[4].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="handBet">{{poker.allHands[4].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[4].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[4].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[4].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="playeraction">{{poker.allHands[4].announce}}</div>
+                </td>
+                <td class="opponent-hand opponent-hand-5" ng-class="{'acting': poker.actingPosition==5, 'lost': poker.allHands[5].lost == true}">
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[5].cards">
+                          <img ng-hide="poker.allHands[5].show == true || poker.allHands[5].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[5].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="handBet">{{poker.allHands[5].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[5].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[5].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[5].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="playeraction">{{poker.allHands[5].announce}}</div>
+                </td>
+                <td class="opponent-hand opponent-hand-6" ng-class="{'acting': poker.actingPosition==6, 'lost': poker.allHands[6].lost == true}">
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[6].cards">
+                          <img ng-hide="poker.allHands[6].show == true || poker.allHands[6].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[6].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="handBet">{{poker.allHands[6].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[6].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[6].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[6].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="playeraction">{{poker.allHands[6].announce}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class='mid-table'>
+            <tbody>
+              <tr>
+                <td class="table-hand">
+                  <div>
+                    <span class="topbet-box">{{poker.topBet}}</span>
+                  </div>
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.tablehandDisplay">
+                          <img ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div>
+                    <span class="pot-box">{{poker.potTotal}}</span>
+                  </div>
+                </td>
+                <td class="burn-hand">
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.burnhand.cards">
+                          <img ng-src="assets/images/cards/backCard.gif" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class='bottom-table'>
+            <tbody>
+              <tr>
+                <td class="opponent-hand opponent-hand-2" ng-class="{'acting': poker.actingPosition==2, 'lost': poker.allHands[2].lost == true}">
+                  <div class="handBet">{{poker.allHands[2].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[2].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[2].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[2].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[2].cards">
+                          <img ng-hide="poker.allHands[2].show == true || poker.allHands[2].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[2].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="playeraction">{{poker.allHands[2].announce}}</div>
+                </td>
+                <td class="opponent-hand opponent-hand-1" ng-class="{'acting': poker.actingPosition==1, 'lost': poker.allHands[1].lost == true}">
+                  <div class="handBet">{{poker.allHands[1].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[1].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[1].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[1].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[1].cards">
+                          <img ng-hide="poker.allHands[1].show == true || poker.allHands[1].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[1].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="playeraction">{{poker.allHands[1].announce}}</div>
+                </td>
+                <td class="player-hand" ng-class="{'acting': poker.actingPosition==0, 'lost': poker.allHands[0].lost == true}">
+                  <div class="handBet">{{poker.allHands[0].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[0].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[0].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[0].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[0].cards">
+                          <img ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="playeraction">{{poker.allHands[0].announce}}</div>
+                </td>
+                <td class="opponent-hand opponent-hand-8" ng-class="{'acting': poker.actingPosition==8, 'lost': poker.allHands[8].lost == true}">
+                  <div class="handBet">{{poker.allHands[8].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[8].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[8].sidePot}}</div>
+                  <div class="dealerChip" ng-show="poker.allHands[8].dealer == true">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[8].cards">
+                          <img ng-hide="poker.allHands[8].show == true || poker.allHands[8].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[8].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="playeraction">{{poker.allHands[8].announce}}</div>
+                </td>
+                <td class="opponent-hand opponent-hand-7" ng-class="{'acting': poker.actingPosition==7, 'lost': poker.allHands[7].lost == true}">
+                  <div class="handBet">{{poker.allHands[7].bet}}</div>
+                  <div class="pokerStack">{{poker.allHands[7].pokerChips}}</div>
+                  <div class="sidePot">{{poker.allHands[7].sidePot}}</div>
+                  <div class="dealerChip" ng-hide="poker.allHands[7].dealer == false">
+                    <img src="assets/images/chips/dealerbutton.jpg" height="50" width="50">
+                  </div>
+                  <div class="hand-collection">
+                      <span ng-repeat="cards in poker.allHands[7].cards">
+                          <img ng-hide="poker.allHands[7].show == true || poker.allHands[7].folded == true" ng-src="assets/images/cards/backCard.gif">
+                          <img ng-show="poker.allHands[7].show == true" ng-src="assets/images/cards/{{ cards.picture }}" alt="{{ deck.picture }}">
+                      </span>
+                  </div>
+                  <div class="playeraction">{{poker.allHands[7].announce}}</div>
+                </td>  
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bottom-box">
+            <div class="bet-box">
+                <span class="start-box">
+                    <button type="button" ng-click="playerRaise(poker.calculatedRange)" ng-disabled="poker.raiseturn == false" class="btn-primary btn-large">Raise ${{poker.calculatedRange}}</button>
+                </span>
+                <!--<span class="chips-box">
+                    <input type="range" min="0" max="50" value="25" />
+                </span>-->
+                <div class="progress-box" ng-app>
+                  <div class="progress-bar progress-bar-slider">
+                    <input class="progress-slider" type="range" min="0" max="100" ng-disabled="poker.roundStarted == false" ng-change="calculateRange()" ng-model="poker.selectedRange">
+                    <div class="inner" ng-style="{ width: poker.selectedRange + '%' || '0%' }"></div>
+                  </div>
+                </div>
+                <span class="bet-display-box">
+                    <p>Pot Total: {{poker.potTotal}}</p>
+                </span>
+                <span class="bank-box">
+                    <p>Chips: {{poker.allHands[0].pokerChips}}</p>
+                </span>
+                <span class="start-game">
+                    <button type="button" ng-disabled="poker.roundStarted == true" ng-click="initRound()" class="btn-primary btn-large">Start Game</button>
+                </span>
+            </div>
+            <div class="play-box">
+                <button type="button" ng-click="makeDecision(2)" ng-disabled="poker.callturn == false" class="btn-primary btn-large">Call ${{poker.topBet}}</button>
+                <button type="button" ng-click="makeDecision(1)" ng-disabled="poker.checkturn == false" class="btn-primary btn-large">Check</button>
+                <button type="button" ng-click="makeDecision(3)" ng-disabled="poker.foldturn == false" class="btn-primary btn-large">Fold</button>
+                <button type="button" ng-click="makeDecision(4)" ng-disabled="poker.allinturn == false" class="btn-primary btn-large">All In ${{poker.maxAllin}}</button>
+            </div>
+            <div class="message-box">
+                {{poker.message}}
+            </div>
+        </div>
+      </div>
+    </div>

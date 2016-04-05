@@ -1,0 +1,30 @@
+	<div class="slots-window game-window">
+        <div>
+        {{tab}}
+        </div>
+        <div>
+            <div class="bottom-box">
+                <div class="bet-box">
+                    <button type="button" ng-click="initGame();" class="btn-primary btn-large">Bet </button>
+                    <button type="button" ng-click="slotsBet(2)" class="btn-primary btn-large">2</button>
+                    <button type="button" ng-click="slotsBet(5)" class="btn-primary btn-large">5</button>
+                    <button type="button" ng-click="slotsBet(10)" class="btn-primary btn-large">10</button>
+                    <button type="button" ng-click="slotsBet(0)" class="btn-primary btn-large">Clr</button>
+                    <div>
+                    <span class="bet-display-box">
+                        <p>Betting value: {{slots.slotBet}}</p>
+                    </span>
+                    <span class="bank-box">
+                        <p>Bank: {{bankBalance}}</p>
+                    </div>
+                    </span>
+                    <span class="final-box">
+                        <p>Result: {{slots.finalSlot}}</p>
+                    </span>
+                </div>
+                <div class="message-box">
+                    {{slots.message}}
+                </div>
+            </div>
+        </div>
+    </div>

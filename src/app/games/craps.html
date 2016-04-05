@@ -1,0 +1,231 @@
+	  <div class="craps-window game-window">
+        
+      <button class="next-week-button btn btn-success" ng-click="nextRound()" ng-disabled="craps.week==craps.teams[0].fixtures.length">
+        Week {{craps.week}}
+      </button>
+      <uib-tabset active="active">
+        <uib-tab index="0" heading="Table">
+          <div class="league-table">
+            <table>
+              <tbody>
+                <tr>
+                  <th>Pos</th>
+                  <th>Team</th>
+                  <th>P</th>
+                  <th>W</th>
+                  <th>D</th>
+                  <th>L</th>
+                  <th>F</th>
+                  <th>A</th>
+                  <th>GD</th>
+                  <th>PT</th>
+                </tr>
+                <tr ng-repeat="team in craps.teams | orderBy:['-league[0].pt', '-league[0].gd', '-league[0].ff']">
+                  <td>{{ $index+1 }}</td>
+                  <td>{{ team.teamName }}</td>
+                  <td ng-repeat="score in team.league[0]">{{score}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Fixtures" active="tab.active">
+          <div class="fixture-table">
+            <table>
+              <tbody>
+                <tr>
+                  <th></th>
+                  <th ng-repeat="fixture in craps.teams[0].fixtures">{{ $index+1 }}</th>
+                </tr>
+                <tr ng-repeat="team in craps.teams | orderBy:'teamName'">
+                  <td>{{ team.teamName }}</td>
+                  <td ng-repeat="fixture in team.fixtures">{{fixture.opponent}}{{fixture.ground}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Results" active="tab.active">
+          <div class="results-page">
+            <div class="table-collection">
+              <table class="results-tables" ng-repeat="game in craps.games">
+                <tbody>
+                  <tr class="team-row">
+                    <td class="results-td-large">{{ game.hometeam }}</td>
+                    <td ng-click="saveGameStats(game)" class="results-td-small">{{ game.homescore }}</td>
+                    <td ng-click="saveGameStats(game)" class="results-td-small">{{ game.awayscore }}</td>
+                    <td class="results-td-large">{{ game.awayteam }}</td>
+                  </tr>
+                  <tr class="scorer-row">
+                    <td class="results-td-large">
+                      <div ng-repeat="scorer in game.homescorer | orderBy:'time'">{{ scorer.player }}</div>
+                    </td>
+                    <td class="results-td-small">
+                      <div ng-repeat="scorer in game.homescorer | orderBy:'time'">{{ scorer.time }}</div>
+                    </td>
+                    <td class="results-td-small">
+                      <div ng-repeat="scorer in game.awayscorer | orderBy:'time'">{{ scorer.time }}</div>
+                    </td>
+                    <td class="results-td-large">
+                      <div ng-repeat="scorer in game.awayscorer | orderBy:'time'">{{ scorer.player }}</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="gamestats-section" ng-hide="craps.gameinfo == null">
+              <div class="home-column">
+                <div class="team-column">
+                  <table>
+                    <tr class="fixed-height-box1">
+                      <th>
+                        {{ craps.gameinfo.hometeam }}
+                      </th>
+                      <th class="fixed-width-box">
+                        {{ craps.gameinfo.homescore }}
+                      </th>
+                    </tr>
+                    <tr class="fixed-height-box2"> 
+                      <td>
+                        <div ng-repeat="scorer in craps.gameinfo.homescorer | orderBy:'time'">{{ scorer.player }}</div>
+                      </td>
+                      <td class="fixed-width-box">
+                        <div ng-repeat="scorer in craps.gameinfo.homescorer | orderBy:'time'">{{ scorer.time }}</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="squad-column">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Players</th>
+                        <th class="fixed-width-box">Rating</th>
+                      </tr>
+                      <tr ng-repeat="player in craps.gameinfo.homesquad">
+                        <td>{{ player.name }}</td>
+                        <td class="fixed-width-box">{{ player.r[player.r.length-1] }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="away-column">
+                <div class="team-column">
+                  <table>
+                    <tr class="fixed-height-box1">
+                      <th>
+                        {{ craps.gameinfo.awayteam }}
+                      </th>
+                      <th class="fixed-width-box">
+                        {{ craps.gameinfo.awayscore }}
+                      </th>
+                    </tr>
+                    <tr class="fixed-height-box2"> 
+                      <td>
+                        <div ng-repeat="scorer in craps.gameinfo.awayscorer | orderBy:'time'">{{ scorer.player }}</div>
+                      </td>
+                      <td class="fixed-width-box">
+                        <div ng-repeat="scorer in craps.gameinfo.awayscorer | orderBy:'time'">{{ scorer.time }}</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="squad-column">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Players</th>
+                        <th class="fixed-width-box">Rating</th>
+                      </tr>
+                      <tr ng-repeat="player in craps.gameinfo.awaysquad">
+                        <td>{{ player.name }}</td>
+                        <td class="fixed-width-box">{{ player.r[player.r.length-1] }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </uib-tab>
+        <uib-tab index="3" heading="Statistics" active="tab.active">
+          <div class="stats-table">
+            <table>
+              <tbody>
+                <tr>
+                  <th>Players</th>
+                  <th>Goals</th>
+                  <th>Club</th>
+                </tr>
+                <tr ng-repeat="scorer in craps.topScorer | orderBy:'-goals' | limitTo:30">
+                  <td>{{ scorer.player }}</td>
+                  <td>{{ scorer.goals }}</td>
+                  <td>{{ scorer.club }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </uib-tab>
+        <uib-tab index="4" heading="Squads" active="tab.active">
+          <div>
+            <table class="squads-table" ng-repeat="teaming in craps.teams">
+              <tbody>
+                <tr>
+                  <th>Position</th>
+                  <th>Player</th>
+                  <th>Age</th>
+                  <th>Skill</th>
+                  <th>Started</th>
+                  <th>Goals</th>
+                  <th>Assists</th>
+                  <th>Rating</th>
+                </tr>
+                <tr ng-repeat="player in teaming.squad[0].gk | orderBy:'-rating'">
+                  <td>GK</td>
+                  <td>{{ player.name }}</td>
+                  <td>{{ player.age }}</td>
+                  <td>{{ player.rating }}</td>
+                  <td>{{ player.gs }}</td>
+                  <td>{{ player.g }}</td>
+                  <td>{{ player.a }}</td>
+                  <td>{{ calculateAverage(player.r) }}</td>
+                </tr>
+                <tr ng-repeat="player in teaming.squad[1].def | orderBy:'-rating'">
+                  <td>D</td>
+                  <td>{{ player.name }}</td>
+                  <td>{{ player.age }}</td>
+                  <td>{{ player.rating }}</td>
+                  <td>{{ player.gs }}</td>
+                  <td>{{ player.g }}</td>
+                  <td>{{ player.a }}</td>
+                  <td>{{ calculateAverage(player.r) }}</td>
+                </tr>
+                <tr ng-repeat="player in teaming.squad[2].mid | orderBy:'-rating'">
+                  <td>M</td>
+                  <td>{{ player.name }}</td>
+                  <td>{{ player.age }}</td>
+                  <td>{{ player.rating }}</td>
+                  <td>{{ player.gs }}</td>
+                  <td>{{ player.g }}</td>
+                  <td>{{ player.a }}</td>
+                  <td>{{ calculateAverage(player.r) }}</td>
+                </tr>
+                <tr ng-repeat="player in teaming.squad[3].att | orderBy:'-rating'">
+                  <td>F</td>
+                  <td>{{ player.name }}</td>
+                  <td>{{ player.age }}</td>
+                  <td>{{ player.rating }}</td>
+                  <td>{{ player.gs }}</td>
+                  <td>{{ player.g }}</td>
+                  <td>{{ player.a }}</td>
+                  <td>{{ calculateAverage(player.r) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+        
+        
+      </div>
