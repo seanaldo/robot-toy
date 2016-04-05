@@ -17,7 +17,6 @@
 
       vm.awesomeThings = [];
       vm.classAnimation = '';
-      vm.creationDate = 1449480128533;
 
       activate();
 
