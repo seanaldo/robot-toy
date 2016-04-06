@@ -8,7 +8,7 @@
     .controller('RobotController', function($scope) {
       var vm = this;
 
-      vm.message = null; vm.robotPosition = null; vm.direction = 'north'; 
+      vm.message = 'Select a grid to start'; vm.robotPosition = null; vm.direction = 'north';  vm.thisCell = null;
 
       vm.table = [];
 
@@ -38,10 +38,15 @@
         }
       }
 
+      $scope.select = function(cell) {
+        vm.thisCell = cell;
+      }
+
       $scope.place = function(cell) {
         if (!vm.robotPosition) {
           cell.filling=true;
           vm.robotPosition = cell.position;
+          vm.message = '';
         }
       }
 

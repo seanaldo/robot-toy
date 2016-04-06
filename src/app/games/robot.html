@@ -5,7 +5,7 @@
             <tr ng-repeat="row in robot.table">
               <td>{{4-$index}}</td>
               <td ng-repeat="cell in row">
-                <div class="cell-square" ng-click="place(cell)">
+                <div class="cell-square" ng-click="select(cell)">
                     <div class="robot-indicator">
                     <span class="robot-arrow" ng-class="{'arrow-up' : robot.direction=='north', 'arrow-right' : robot.direction=='east', 'arrow-left' : robot.direction=='west', 'arrow-down' : robot.direction=='south'}" ng-show="cell.filling"></span>
                     <img class="robot-toy" ng-show="cell.filling" src="assets/images/robot.png" height="68" width="68"></img>
@@ -25,9 +25,10 @@
         </div>
         <div class="bottom-box">
             <div class="play-box">
+                <button type="button" ng-click="place(robot.thisCell)" ng-disabled="robot.thisCell == null || robot.robotPosition!=null" class="btn-primary btn-large">Place [{{robot.thisCell.position[0]}},{{robot.thisCell.position[1]}}] facing {{robot.direction}}</button>
                 <button type="button" ng-click="move()" ng-disabled="robot.robotPosition==null || cannotMove(robot.direction)" class="btn-primary btn-large">Move</button>
-                <button type="button" ng-click="rotate(true)" ng-disabled="robot.robotPosition==null" class="btn-primary btn-large">Left</button>
-                <button type="button" ng-click="rotate(false)" ng-disabled="robot.robotPosition==null" class="btn-primary btn-large">Right</button>
+                <button type="button" ng-click="rotate(true)" class="btn-primary btn-large">Rotate Left</button>
+                <button type="button" ng-click="rotate(false)" class="btn-primary btn-large">Rotate Right</button>
                 <button type="button" ng-click="report()" ng-disabled="robot.robotPosition==null" class="btn-primary btn-large">Report</button>
             </div>
             <div class="message-box">
