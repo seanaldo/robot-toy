@@ -8,7 +8,7 @@
     .controller('RobotController', function($scope) {
       var vm = this;
 
-      vm.message = 'Select a grid to start'; vm.robotPosition = null; vm.direction = 'north';  vm.thisCell = null;
+      vm.message = 'Choose a grid to place your robot'; vm.robotPosition = null; vm.direction = 'north';  vm.thisCell = null;
 
       vm.table = [];
 
