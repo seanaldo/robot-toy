@@ -10,25 +10,29 @@
 // bower:scss
 // endbower
 .robot-window {
-    background-color: red;
-    position: relative;
-    .middle-box {
-      position: absolute;
-      height: 70%;
-      width: 100%;
-      background-color: yellow;
-      .robot-table {
-        margin-left: auto;
-        margin-right: auto;
-        .cell-square {
+  background-color: yellow;
+  opacity: 0.9;
+  position: relative;
+  .middle-box {
+    position: absolute;
+    width: 100%;
+    .robot-table {
+      margin-left: auto;
+      margin-right: auto;
+      th {
+        text-align: center;
+      }
+      .cell-square {
+        height: 100px;
+        width: 100px;
+        border: 1px solid #000;
+        .robot-indicator {
           position: relative;
-          height: 80px;
-          width: 80px;
-          border: 1px solid #000;
-          text-align: center;
-          vertical-align: middle;
+          width: 100%;
+          height: 100%;
           img.robot-toy {
-            margin-top: 15px;
+            margin: 15px;
+            position: absolute;
           }
           .robot-arrow {
             position: absolute;
@@ -36,225 +40,76 @@
           .arrow-up {
             width: 0; 
             height: 0; 
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            
-            border-bottom: 10px solid black;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid black;
+            margin: 2.5px 30px;
+            top: 0;
           }
-
           .arrow-down {
             width: 0; 
             height: 0; 
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            
-            border-top: 10px solid black;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid black;
+            margin: 2.5px 30px;
+            bottom: 0;
           }
-
           .arrow-right {
             width: 0; 
             height: 0; 
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            
-            border-left: 10px solid black;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid black;
+            margin: 30px 2.5px;
+            right: 0;
           }
-
           .arrow-left {
             width: 0; 
             height: 0; 
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent; 
-            
-            border-right:10px solid black; 
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right:15px solid black;
+            margin: 30px 2.5px;
+            left: 0;
           }
         }
       }
     }
-    .bottom-box {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 70px;
-      padding: 0 10px;
-      margin: 10px 0;
-      .play-box {
-        right: 22%;
-        left: 10px;
-        height: 35px;
-        top: 35px;
-        position: absolute;
-        button {
-          width: 20%;
-          float: left;
-          height: 100%;
-        }
-      }
-      .message-box {
-        text-align: center;
-        width: 20%;
-        right: 10px;
-        height: 70px;
-        background-color: #fff;
-        border: 1px solid #000;
-        position: absolute;
-        overflow-y: scroll; 
-      }
-      button[disabled=disabled], button:disabled {
-        opacity:0.7;
-      }
-    }
-    
-
-    .final-box {
+  }
+  .bottom-box {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 70px;
     padding: 0 10px;
     margin: 10px 0;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 30px;
-    }
-      .button-location {
-      top: 90%;
-      height: 10%;
+    .play-box {
+      right: 22%;
+      left: 10px;
+      height: 35px;
+      top: 35px;
       position: absolute;
+      button {
+        width: 25%;
+        float: left;
+        height: 100%;
+      }
     }
-    .bottom-box {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+    .message-box {
+      text-align: center;
+      width: 20%;
+      right: 10px;
       height: 70px;
-      padding: 0 10px;
-      margin: 10px 0;
-      .bet-box {
-        right: 22%;
-        left: 10px;
-        height: 35px;
-        position: absolute;
-        span {
-          float: left;
-          width: 20%;
-          height: 100%;
-        }
-
-        .progress-box {
-          float: left;
-          width: 20%;
-          height: 100%;
-          .percentage-cur .num {
-            margin-right: 5px;
-          }
-          .progress-bar {
-            width: 100%;
-            height: 60%;
-            background: #f2f1f1;
-            margin-bottom: 3px;
-            border: 1px solid #dfdfdf;
-            box-shadow: 0 0 2px #D5D4D4 inset;
-            position: relative;
-            .inner {
-              position: relative;
-              width: 0;
-              height:100%;
-              background: #239bd6; 
-            }
-            .inner {
-              height: 0;
-              width: 0;
-            }
-          }
-        }
-
-        .progress-bar-slider {
-          .inner {
-            transition: none;
-          }
-          .inner:after {
-            content: " ";
-            width: 5px;
-            background-color:#ccc;
-            position: absolute;
-            right: -2px;
-            top: -2px;
-            bottom: -20px;
-            border: 1px solid #bbb;
-            border-radius: 2px;
-            box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
-            margin: 0px;
-          }
-        }
-
-        .progress-slider {
-          opacity: 0;
-          width: 100%;
-          height: 15px;
-          position: absolute;
-          top: 0px;
-          left: 0px;
-          cursor: pointer;
-          z-index: 1;
-        }
-
-        .start-box {
-          button {
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .cash-handling-box {
-          button {
-            width: 50%;
-            height: 100%;
-            float: left;
-          }
-        }
-        .chips-box {
-          button {
-            width: 25%;
-            float: left;
-            height: 100%;
-          }
-        }
-        .bet-display-box {
-          background-color: #fff;
-          text-align: center;
-          border: 1px solid #000;
-        }
-        .bank-box {
-          background-color: #fff;
-          text-align: center;
-          border: 1px solid #000;
-        }
-      }
-      .play-box {
-        right: 22%;
-        left: 10px;
-        height: 35px;
-        top: 35px;
-        position: absolute;
-        button {
-          width: 20%;
-          float: left;
-          height: 100%;
-        }
-      }
-      .message-box {
-        text-align: center;
-        width: 20%;
-        right: 10px;
-        height: 70px;
-        background-color: #fff;
-        border: 1px solid #000;
-        position: absolute;
-        overflow-y: scroll; 
-      }
-      button[disabled=disabled], button:disabled {
-        opacity:0.7;
-      }
+      background-color: #fff;
+      border: 1px solid #000;
+      position: absolute;
+      overflow-y: scroll; 
     }
-    
+    button[disabled=disabled], button:disabled {
+      opacity:0.7;
+    }
+  }
 }
 
 /**
