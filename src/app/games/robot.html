@@ -1,44 +1,24 @@
-    <div class="poker-window game-window">
-      <div ng-show="poker.gameStarted == true">
-        <div class="chance-box pull-right" ng-show="poker.assessChanceOption == 'on'">
-            <h3>{{assessChance()}}</h3>
-        </div>
-        <!--settings modal-->
-        <div class="settings-modal">
-          <button ng-click="toggleModal()" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
-          <modal title="Poker Settings" visible="showModal">
-            <div>
-              Winning Probability: 
-              <label class="radio-inline active">
-                <input type="radio" ng-model="poker.assessChanceOption" value="on" checked=""> On
-              </label>
-              <label class="radio-inline">
-                <input type="radio" ng-model="poker.assessChanceOption" value="off"> Off 
-              </label>
-            </div>
-            <div>
-              Deck Used: 
-              <button type="submit" ng-click="changeDeck('default')" class="btn btn-default" ng-class="{'active': poker.typeOfDeck == 'default'}">Real Deck</button>
-              <button type="submit" ng-click="changeDeck('pokertest')" class="btn btn-default" ng-class="{'active': poker.typeOfDeck == 'pokertest'}">Testdeck</button>
-            </div>
-            <div>
-              <button type="submit" ng-click="saveGame()" class="btn btn-default">Save Game</button>
-              <button type="submit" ng-click="loadGame()" class="btn btn-default">Load Game</button>
-            </div>
-            <div>
-              <button type="submit" ng-click="testCards()" class="btn btn-default">Test Cards</button>
-            </div>
-          </modal>
-        </div>
-        <!--end modal-->
-        <div class="poker-table-seatings">
+    <div class="robot-window game-window">
+      <div>
+        <div class="middle-box">
+          <table class="robot-table">
+            <tr ng-repeat="row in robot.table">
+              <td ng-repeat="cell in row">
+                <div class="cell-square" ng-click="place(cell)">
+                  <!--<i class="glyphicon" ng-class="{'glyphicon-triangle-right' : robot.direction=='east', 'glyphicon-triangle-left' : robot.direction=='west', 'glyphicon-triangle-down' : robot.direction=='south', 'glyphicon-triangle-up' : robot.direction=='north'}"></i>-->
+                  <span class="robot-arrow" ng-class="{'arrow-up' : robot.direction=='north', 'arrow-right' : robot.direction=='east', 'arrow-left' : robot.direction=='west', 'arrow-down' : robot.direction=='south'}" ng-show="cell.filling"></span>
+                  <img class="robot-toy" ng-show="cell.filling" src="assets/images/chips/10chip.jpg" height="48" width="48"></img>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
         <div class="bottom-box">
             <div class="play-box">
-                <button type="button" ng-click="place()" ng-disabled="" class="btn-primary btn-large">Place</button>
+                <button type="button" ng-click="place()" class="btn-primary btn-large">Place</button>
                 <button type="button" ng-click="move()" ng-disabled="" class="btn-primary btn-large">Move</button>
-                <button type="button" ng-click="left()" ng-disabled="" class="btn-primary btn-large">Left</button>
-                <button type="button" ng-click="right()" ng-disabled="" class="btn-primary btn-large">Right</button>
+                <button type="button" ng-click="rotate(left)" ng-disabled="" class="btn-primary btn-large">Left</button>
+                <button type="button" ng-click="rotate(right)" ng-disabled="" class="btn-primary btn-large">Right</button>
                 <button type="button" ng-click="report()" ng-disabled="" class="btn-primary btn-large">Report</button>
             </div>
             <div class="message-box">
