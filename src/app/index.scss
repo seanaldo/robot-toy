@@ -57,38 +57,11 @@ body {
   }
 }
 
-.roulette-window {
-    background-image: url(../assets/images/roulettetable.png);
-}
-.baccarat-window {
-    background-image: url(../assets/images/baccarattable.png);
-}
-
 .thumbnail {
   height: 200px;
-  img.pull-right {
-    width: 150px;
-    position: absolute;
-    bottom: 15px;
-    top: 0;
-    right: 20px;
-    margin: auto;
-  }
   .caption {
     p {
       margin-right: 150px;
-    }
-  }
-}
-
-.settings-modal {
-  button.close {
-    margin-top: 0 !important;
-  }
-  .modal-body {
-    .btn.active {
-      background-color: #09f;
-      color: #fff;
     }
   }
 }
