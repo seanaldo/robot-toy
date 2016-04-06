@@ -5,14 +5,7 @@
     .module('angularProject')
   /** @ngInject */
 
-    .factory('globalService', function($scope, $user) {
-      function updateBankBalance() {
-        //placeholder for global bank balance
-        $scope.bankBalance = $user.bankBalance;
-      }
-    })
-
-    .controller('MainController', function($scope, $user, $timeout, webDevTec, toastr) {
+    .controller('MainController', function($scope, webDevTec) {
       var vm = this;
 
       vm.awesomeThings = [];

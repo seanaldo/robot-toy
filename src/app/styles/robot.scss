@@ -10,19 +10,23 @@
 // bower:scss
 // endbower
 .robot-window {
-  background-color: yellow;
-  opacity: 0.9;
   position: relative;
+  background-image: url(../assets/images/floor.jpg);
+  background-size: 50%;
   .middle-box {
     position: absolute;
     width: 100%;
     .robot-table {
       margin-left: auto;
       margin-right: auto;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
       th {
         text-align: center;
       }
       .cell-square {
+        background-color: yellow;
         height: 100px;
         width: 100px;
         border: 1px solid #000;

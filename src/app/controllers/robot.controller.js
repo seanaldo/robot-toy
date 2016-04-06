@@ -5,12 +5,8 @@
     .module('angularProject')
   /** @ngInject */
 
-    .controller('RobotController', function($scope, $filter, $user, $cookies) {
+    .controller('RobotController', function($scope) {
       var vm = this;
-
-      
-      vm.isGreat == false;
-      //initialise global poker balance
 
       vm.message = null; vm.robotPosition = null; vm.direction = 'north'; 
 
@@ -54,20 +50,14 @@
         var row = tableLocation[0];
         var column = tableLocation[1];
         vm.table[row][column].filling = false;
-        switch(vm.direction) {
-          case 'north':
-            row--;
-            break;
-          case 'west':
-            column--;
-            break;
-          case 'east':
-            column++;
-            break;
-          case 'south':
-            row++;
-            break;
-          default: break;
+        if (vm.direction == 'north') {
+          row--;
+        } else if (vm.direction == 'west') {
+          column--;
+        } else if (vm.direction == 'east') {
+          column++;
+        } else if (vm.direction == 'south') {
+          row++;
         }
         moveRobot(row,column);
       }
